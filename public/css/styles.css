@@ -1,0 +1,8 @@
+.titulo-table{
+    display: flex;
+    justify-content: space-between;
+}
+.action{
+    display: flex;
+    justify-content: space-between;
+}
