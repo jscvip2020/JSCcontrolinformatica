@@ -26,10 +26,16 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::orderBy('id', 'DESC')->paginate(4);
-        return view('roles.index', compact(['roles']));
+        if ($request->has('search')) {
+            $busca = $request->search;
+            $roles = Role::where('name', 'LIKE', '%' . $busca . '%')
+                ->orderBy('id', 'DESC')->paginate(4)->appends('search', $busca);
+        }else {
+            $roles = Role::orderBy('id', 'DESC')->paginate(4);
+        }
+        return view('roles.index', compact('roles'));
     }
 
     /**

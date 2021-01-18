@@ -23,9 +23,15 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = Permission::orderBy('id', 'DESC')->paginate(12);
+        if ($request->has('search')) {
+            $busca = $request->search;
+            $permissions = Permission::where('name', 'LIKE', '%' . $busca . '%')
+                ->orderBy('id', 'DESC')->paginate(8)->appends('search', $busca);
+        }else {
+            $permissions = Permission::orderBy('id', 'DESC')->paginate(8);
+        }
         return view('permissions.index', compact('permissions'));
     }
 

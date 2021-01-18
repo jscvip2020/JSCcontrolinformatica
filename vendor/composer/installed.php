@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7a3793e1cad41253694a2baf9dfacbf8b0bc697b',
+    'reference' => '5d55b23aaf03032725871a9e3afe4f02949e4369',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -445,7 +445,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7a3793e1cad41253694a2baf9dfacbf8b0bc697b',
+      'reference' => '5d55b23aaf03032725871a9e3afe4f02949e4369',
     ),
     'laravel/sail' => 
     array (
@@ -473,6 +473,15 @@
       array (
       ),
       'reference' => 'a1f82c6283c8373ea1958b8a27c3d5c98cade351',
+    ),
+    'laravellegends/pt-br-validator' => 
+    array (
+      'pretty_version' => '8.0.0',
+      'version' => '8.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'fcb368b07d4e3e2b7cf3ad536926c7c8ffb87aba',
     ),
     'league/commonmark' => 
     array (

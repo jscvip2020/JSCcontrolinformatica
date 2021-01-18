@@ -15,7 +15,7 @@
         <!-- sidebar-header  -->
         <div class="sidebar-item sidebar-header d-flex flex-nowrap">
             <div class="user-pic">
-                <img class="img-responsive img-rounded" src="img/user.jpg" alt="User picture">
+                <img class="img-responsive img-rounded" src="{{asset('img/user.jpg')}}" alt="User picture">
             </div>
             <div class="user-info">
                         <span class="user-name">
@@ -41,19 +41,30 @@
             </div>
         </div>
         <!-- sidebar-search  -->
-        <div class="sidebar-item sidebar-search">
-            <div>
-                <div class="input-group">
-                    <input type="text" class="form-control search-menu" placeholder="Search...">
-                    <div class="input-group-append">
+        <?php
+        $index = explode(".", request()->route()->getName());
+        ?>
+        @if($index[0]!="")
+            @if($index[1]=='index')
+                <div class="sidebar-item sidebar-search">
+                    <div>
+                        <form action="{{ route(request()->route()->getName()) }}" method="get">
+                            <div class="input-group">
+
+                                <input type="text" class="form-control search-menu" name="search"
+                                       placeholder="buscar {{ $index[0] }}...">
+                                <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </span>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- sidebar-menu  -->
+        @endif
+    @endif
+    <!-- sidebar-menu  -->
         <div class=" sidebar-item sidebar-menu">
             <ul>
                 <li class="header-menu">
@@ -77,7 +88,7 @@
                         </a>
                     </li>
                 @endcan
-                {{--@can('permission-list')--}}
+                @can('permission-list')
                     <li class="{{ (request()->route()->getName()=='permissions.index' OR request()->route()->getName()=='permissions.create' OR request()->route()->getName()=='permissions.edit' OR request()->route()->getName()=='permissions.show')? 'active' :'' }}">
                         <a href="{{ route('permissions.index') }}">
                             <i class="fa fa-book"></i>
@@ -85,29 +96,38 @@
                             <span class="badge badge-pill badge-primary">{{ $permissionsAll }}</span>
                         </a>
                     </li>
-                {{--@endcan--}}
+                @endcan
+                @can('client-list')
+                    <li class="{{ (request()->route()->getName()=='clientes.index' OR request()->route()->getName()=='clientes.create' OR request()->route()->getName()=='clientes.edit' OR request()->route()->getName()=='clientes.show')? 'active' :'' }}">
+                        <a href="{{ route('clientes.index') }}">
+                            <i class="fa fa-users"></i>
+                            <span class="menu-text">Clientes</span>
+                            <span class="badge badge-pill badge-primary">{{ $clientesAll }}</span>
+                        </a>
+                    </li>
+                @endcan
 
                 {{--<li class="sidebar-dropdown">--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="fa fa-tachometer-alt"></i>--}}
-                        {{--<span class="menu-text">Dashboard</span>--}}
-                        {{--<span class="badge badge-pill badge-warning">New</span>--}}
-                    {{--</a>--}}
-                    {{--<div class="sidebar-submenu">--}}
-                        {{--<ul>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">Dashboard 1--}}
-                                    {{--<span class="badge badge-pill badge-success">Pro</span>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">Dashboard 2</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">Dashboard 3</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                    {{--</div>--}}
+                {{--<a href="#">--}}
+                {{--<i class="fa fa-tachometer-alt"></i>--}}
+                {{--<span class="menu-text">Dashboard</span>--}}
+                {{--<span class="badge badge-pill badge-warning">New</span>--}}
+                {{--</a>--}}
+                {{--<div class="sidebar-submenu">--}}
+                {{--<ul>--}}
+                {{--<li>--}}
+                {{--<a href="#">Dashboard 1--}}
+                {{--<span class="badge badge-pill badge-success">Pro</span>--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                {{--<a href="#">Dashboard 2</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                {{--<a href="#">Dashboard 3</a>--}}
+                {{--</li>--}}
+                {{--</ul>--}}
+                {{--</div>--}}
                 {{--</li>--}}
             </ul>
         </div>

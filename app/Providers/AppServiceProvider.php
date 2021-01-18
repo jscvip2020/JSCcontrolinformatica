@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\client;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+       //
     }
 
     /**
@@ -31,11 +32,13 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
 
-//        $users = count(User::all());
-//        $roles = count(Role::all());
-//        $permissions = count(Permission::all());
-//        view()->share('rolesAll', $roles);
-//        view()->share('users', $users);
-//        view()->share('permissionsAll', $permissions);
+        $users = count(User::all());
+        $roles = count(Role::all());
+        $permissions = count(Permission::all());
+        $clientes = count(Client::all());
+        view()->share('rolesAll', $roles);
+        view()->share('users', $users);
+        view()->share('permissionsAll', $permissions);
+        view()->share('clientesAll', $clientes);
     }
 }

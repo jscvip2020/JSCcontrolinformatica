@@ -24,11 +24,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $data = User::orderBy('id', 'DESC')->paginate(12);
-        return view('users.index', compact(['data']));
+        if ($request->has('search')) {
+            $busca = $request->search;
+            $data = User::where('name', 'LIKE', '%' . $busca . '%')
+                ->orWhere('email', 'LIKE', '%' . $busca . '%')
+                ->orderBy('id', 'DESC')->paginate(5)->appends('search', $busca);
+        }else {
+            $data = User::orderBy('id', 'DESC')->paginate(12);
+        }
+        return view('users.index', compact('data'));
     }
 
     /**

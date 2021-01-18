@@ -15,17 +15,18 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
+            $table->string('nome')->nullable();
             $table->string('razaosocial')->nullable();
-            $table->string('nomefamtasia')->nullable();
+            $table->string('nomefantasia')->nullable();
             $table->string('endereco');
+            $table->string('cep')->default('00000-000');
             $table->string('bairro');
             $table->string('cidadeuf');
             $table->string('celular')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('fixo')->nullable();
             $table->string('email')->nullable();
-            $table->string('pessoa');
+            $table->enum('pessoa',['Fisica','Juridica']);
             $table->string('cpf')->nullable();
             $table->string('cnpj')->nullable();
             $table->string('inscricao')->nullable();
