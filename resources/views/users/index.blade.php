@@ -54,7 +54,7 @@
                                                 </td>
                                                 <td class="action">
                                                     @can('user-edit')
-                                                        <a class="btn btn-info btn-sm"
+                                                        <a class="btn btn-info btn-sm mr-1"
                                                            href="{{ route('users.edit', $user->id) }}" title="Editar"><i
                                                                     class="fa fa-edit"></i></a>
                                                     @endcan

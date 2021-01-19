@@ -64,12 +64,12 @@
                                                     Whatsapp: {{ $client->whatsapp }}</td>
                                                 <td>{{ $client->email }}</td>
                                                 <td class="action">
-                                                    <a class="btn btn-success btn-sm"
+                                                    <a class="btn btn-success btn-sm mr-1"
                                                        href="{{ route('clientes.show', $client->id) }}"
                                                        title="visualizar"><i
                                                                 class="fa fa-eye"></i></a>
                                                     @can('client-edit')
-                                                        <a class="btn btn-info btn-sm"
+                                                        <a class="btn btn-info btn-sm mr-1"
                                                            href="{{ route('clientes.edit', $client->id) }}"
                                                            title="Editar"><i
                                                                     class="fa fa-edit"></i></a>

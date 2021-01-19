@@ -8,7 +8,7 @@
 
 @extends('layouts.appAdmin')
 
-@section('title',' - Contpermission de Permissiões')
+@section('title',' - Controle de Permissões')
 
 @section('content')
     <div class="container">
@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header titulo-table">
-                        <h2 class="col-md-6">Contpermission de Permissões</h2>
+                        <h2 class="col-md-6">Controle de Permissões</h2>
                         <a class="btn btn-primary" href="{{ route('permissions.create') }}">
                             <i class="fa fa-plus"> Nova Permissão</i>
                         </a>
@@ -43,12 +43,12 @@
                                                 <td>{{ $i++ }}</td>
                                                 <td>{{ $permission->name }}</td>
                                                 <td class="action">
-                                                    <a class="btn btn-success btn-sm"
+                                                    <a class="btn btn-success btn-sm mr-1"
                                                        href="{{ route('permissions.show', $permission->id) }}"
                                                        title="visualizar"><i
                                                                 class="fa fa-eye"></i></a>
                                                     @can('permission-edit')
-                                                        <a class="btn btn-info btn-sm"
+                                                        <a class="btn btn-info btn-sm mr-1"
                                                            href="{{ route('permissions.edit', $permission->id) }}"
                                                            title="Editar"><i
                                                                     class="fa fa-edit"></i></a>

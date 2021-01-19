@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\client;
+use App\Models\Marca;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
@@ -36,9 +37,11 @@ class AppServiceProvider extends ServiceProvider
         $roles = count(Role::all());
         $permissions = count(Permission::all());
         $clientes = count(Client::all());
+        $marcas = count(Marca::all());
         view()->share('rolesAll', $roles);
         view()->share('users', $users);
         view()->share('permissionsAll', $permissions);
         view()->share('clientesAll', $clientes);
+        view()->share('marcasAll', $marcas);
     }
 }

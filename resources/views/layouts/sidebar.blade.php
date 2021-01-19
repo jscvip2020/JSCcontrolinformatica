@@ -106,6 +106,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('marca-list')
+                    <li class="{{ (request()->route()->getName()=='marcas.index' OR request()->route()->getName()=='marcas.create' OR request()->route()->getName()=='marcas.edit' OR request()->route()->getName()=='marcas.show')? 'active' :'' }}">
+                        <a href="{{ route('marcas.index') }}">
+                            <i class="fa fa-users"></i>
+                            <span class="menu-text">Marcas</span>
+                            <span class="badge badge-pill badge-primary">{{ $marcasAll }}</span>
+                        </a>
+                    </li>
+                @endcan
 
                 {{--<li class="sidebar-dropdown">--}}
                 {{--<a href="#">--}}
