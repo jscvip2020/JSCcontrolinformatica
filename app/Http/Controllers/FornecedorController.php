@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Fornecedor;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class FornecedorController extends Controller
 {
-    /**
-     * ClienteController constructor.
-     */
     function __construct()
     {
-        $this->middleware('permission:client-list|client-create|client-edit|client-delete', ['only' => ['index']]);
-        $this->middleware('permission:client-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:client-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:client-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:fornecedor-list|fornecedor-create|fornecedor-edit|fornecedor-delete', ['only' => ['index']]);
+        $this->middleware('permission:fornecedor-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:fornecedor-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:fornecedor-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -27,16 +24,16 @@ class ClienteController extends Controller
     {
         if ($request->has('search')) {
             $busca = $request->search;
-            $clients = Client::where('nome','LIKE','%'.$busca.'%')
+            $fornecedors = Fornecedor::where('contato','LIKE','%'.$busca.'%')
                 ->orWhere('nomefantasia','LIKE','%'.$busca.'%')
                 ->orWhere('razaosocial','LIKE','%'.$busca.'%')
-                ->orWhere('cpf','LIKE','%'.$busca.'%')
                 ->orWhere('cnpj','LIKE','%'.$busca.'%')
+                ->orWhere('skype','LIKE','%'.$busca.'%')
                 ->orderBy('id', 'DESC')->paginate(5)->appends('search',$busca);
         } else {
-            $clients = Client::orderBy('id', 'DESC')->paginate(10);
+            $fornecedors = Fornecedor::orderBy('id', 'DESC')->paginate(10);
         }
-        return view('clients.index', compact('clients'));
+        return view('fornecedors.index', compact('fornecedors'));
     }
 
     /**
@@ -46,7 +43,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        return view('fornecedors.create');
     }
 
     /**
@@ -59,22 +56,21 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nome' => 'exclude_if:pessoa,"Juridica"|required',
-            'nomefantasia' => 'exclude_if:pessoa,"Fisica"|required',
-            'cpf' => 'nullable|cpf|formato_cpf|unique:clients,cpf',
-            'cnpj' => 'nullable|cnpj|formato_cnpj|unique:clients,cnpj',
+            'contato' => 'required',
+            'razaosocial' => 'required_without:nomefantasia',
+            'nomefantasia' => 'required_without:razaosocial',
+            'cnpj' => 'nullable|cnpj|formato_cnpj|unique:fornecedors,cnpj',
             'fixo' => 'required_without_all:celular,whatsapp,email',
             'celular' => 'required_without_all:fixo,whatsapp,email',
             'whatsapp' => 'required_without_all:fixo,celular,email',
             'email' => 'required_without_all:fixo,celular,whatsapp|email',
         ]);
 
-//        dd($request->all());
-        $cliente = Client::create($request->all());
-        if($cliente) {
-            return redirect()->route('clientes.index')->with('success', 'Adicionado com sucesso!!');
+        $fornecedore = Fornecedor::create($request->all());
+        if($fornecedore) {
+            return redirect()->route('fornecedores.index')->with('success', 'Adicionado com sucesso!!');
         }else {
-            return redirect()->route('clientes.index')->with('error', 'Não foi posível adicionar!!');
+            return redirect()->route('fornecedores.index')->with('error', 'Não foi posível adicionar!!');
         }
     }
 
@@ -86,8 +82,8 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $data = Client::findOrFail($id);
-        return view('clients.show',compact('data'));
+        $data = Fornecedor::findOrFail($id);
+        return view('fornecedors.show',compact('data'));
     }
 
     /**
@@ -98,9 +94,9 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        $data = Client::findOrFail($id);
+        $data = Fornecedor::findOrFail($id);
 
-        return view('clients.edit',compact('data'));
+        return view('fornecedors.edit',compact('data'));
     }
 
     /**
@@ -114,10 +110,10 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nome' => 'exclude_if:pessoa,"Juridica"|required',
-            'nomefantasia' => 'exclude_if:pessoa,"Fisica"|required',
-            'cpf' => 'nullable|cpf|formato_cpf|unique:clients,cpf,'.$id,
-            'cnpj' => 'nullable|cnpj|formato_cnpj|unique:clients,cnpj,'.$id,
+            'contato' => 'required',
+            'razaosocial' => 'required_without:nomefantasia',
+            'nomefantasia' => 'required_without:razaosocial',
+            'cnpj' => 'nullable|cnpj|formato_cnpj|unique:fornecedors,cnpj,'.$id,
             'fixo' => 'required_without_all:celular,whatsapp,email',
             'celular' => 'required_without_all:fixo,whatsapp,email',
             'whatsapp' => 'required_without_all:fixo,celular,email',
@@ -125,12 +121,12 @@ class ClienteController extends Controller
         ]);
 
 //        dd($request->all());
-        $data = Client::findOrFail($id);
-        $cliente = $data->update($request->all());
-        if($cliente) {
-            return redirect()->route('clientes.index')->with('success', 'Atualizado com sucesso!!');
+        $data = Fornecedor::findOrFail($id);
+        $fornecedore = $data->update($request->all());
+        if($fornecedore) {
+            return redirect()->route('fornecedores.index')->with('success', 'Atualizado com sucesso!!');
         }else {
-            return redirect()->route('clientes.index')->with('error', 'Não foi posível atualizar!!');
+            return redirect()->route('fornecedores.index')->with('error', 'Não foi posível atualizar!!');
         }
     }
 
@@ -143,11 +139,11 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
-        $cliente = Client::findOrFail($id)->delete();
-        if($cliente) {
-            return redirect()->route('clientes.index')->with('success', 'Deletado com sucesso!!');
+        $fornecedor = Fornecedor::findOrFail($id)->delete();
+        if($fornecedor) {
+            return redirect()->route('fornecedores.index')->with('success', 'Deletado com sucesso!!');
         }else {
-            return redirect()->route('clientes.index')->with('error', 'Não foi posível Deletar!!');
+            return redirect()->route('fornecedores.index')->with('error', 'Não foi posível Deletar!!');
         }
     }
 }

@@ -106,10 +106,19 @@
                         </a>
                     </li>
                 @endcan
+                @can('fornecedor-list')
+                    <li class="{{ (request()->route()->getName()=='fornecedores.index' OR request()->route()->getName()=='fornecedores.create' OR request()->route()->getName()=='fornecedores.edit' OR request()->route()->getName()=='fornecedores.show')? 'active' :'' }}">
+                        <a href="{{ route('fornecedores.index') }}">
+                            <i class="fa fa-users"></i>
+                            <span class="menu-text">Fornecedores</span>
+                            <span class="badge badge-pill badge-primary">{{ $fornecedoresAll }}</span>
+                        </a>
+                    </li>
+                @endcan
                 @can('marca-list')
                     <li class="{{ (request()->route()->getName()=='marcas.index' OR request()->route()->getName()=='marcas.create' OR request()->route()->getName()=='marcas.edit' OR request()->route()->getName()=='marcas.show')? 'active' :'' }}">
                         <a href="{{ route('marcas.index') }}">
-                            <i class="fa fa-users"></i>
+                            <i class="fa fa-copyright"></i>
                             <span class="menu-text">Marcas</span>
                             <span class="badge badge-pill badge-primary">{{ $marcasAll }}</span>
                         </a>

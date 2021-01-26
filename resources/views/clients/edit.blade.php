@@ -221,11 +221,15 @@
                                     <label for="{{ $campo }}" class="col-md-3 text-right col-form-label">Fixo</label>
 
                                     <div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-phone"></i></div>
+                                            </div>
                                         <input type="text" id="phone"
                                                class="phone form-control @error($campo) is-invalid @enderror"
                                                name="{{ $campo }}"
                                                value="{{ old($campo) ? old($campo) : $data->$campo }}">
-
+                                        </div>
                                         @error($campo)
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -239,11 +243,15 @@
                                     <label for="{{ $campo }}" class="col-md-3 text-right col-form-label">Celular</label>
 
                                     <div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-mobile"></i></div>
+                                            </div>
                                         <input type="text"
                                                class="phone form-control @error($campo) is-invalid @enderror"
                                                name="{{ $campo }}"
                                                value="{{ old($campo) ? old($campo) : $data->$campo }}">
-
+                                        </div>
                                         @error($campo)
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -258,11 +266,15 @@
                                            class="col-md-3 text-right col-form-label">Whatsapp</label>
 
                                     <div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fab fa-whatsapp"></i></div>
+                                            </div>
                                         <input type="text"
                                                class="phone form-control @error($campo) is-invalid @enderror"
                                                name="{{ $campo }}"
                                                value="{{ old($campo) ? old($campo) : $data->$campo }}">
-
+                                        </div>
                                         @error($campo)
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -277,11 +289,15 @@
                                            class="col-md-3 text-right col-form-label">Email</label>
 
                                     <div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fa fa-envelope"></i></div>
+                                            </div>
                                         <input type="email"
                                                class="form-control @error($campo) is-invalid @enderror"
                                                name="{{ $campo }}"
                                                value="{{ old($campo) ? old($campo) : $data->$campo }}">
-
+                                        </div>
                                         @error($campo)
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -295,7 +311,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Alterar Regra
+                                        Alterar Cliente
                                     </button>
                                     <a href="{{ route('clientes.index') }}" class="btn btn-danger"> Cancelar</a>
                                 </div>

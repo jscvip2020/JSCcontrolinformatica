@@ -1,34 +1,15 @@
 @extends('layouts.appAdmin')
-@section('title', ' - Registrando Cliente')
+@section('title', ' - Registrando Fornecedor')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Registrar Cliente</div>
+                    <div class="card-header">Registrar Fornecedor</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('clientes.store') }}">
+                        <form method="POST" action="{{ route('fornecedores.store') }}">
                             @csrf
-                            <?php $campo = 'pessoa'?>
-                            <div class="form-group row">
-                                <label for="{{ $campo }}" class="col-md-3 text-right col-form-label">Pessoa</label>
-
-                                <div class="col-md-9">
-                                    <input id="pfisica" type="radio"
-                                           {{old($campo) ? (old($campo) == 'Fisica') ? 'checked' :'' :'checked'}} class=" @error($campo) is-invalid @enderror"
-                                           name="{{ $campo }}" value="Fisica"> Fisica
-                                    <input id="pjuridica" type="radio"
-                                           {{(old($campo) == 'Juridica') ? 'checked' :''}} class=" @error($campo) is-invalid @enderror"
-                                           name="{{ $campo }}" value="Juridica"> Juridica
-
-                                    @error($campo)
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <?php $campo = 'razaosocial'?>
                             <div class="form-group row razaosocial">
                                 <label for="{{ $campo }}" class="col-md-3 text-right col-form-label">Razão
@@ -64,42 +45,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <?php $campo = 'nome'?>
-                            <div class="form-group row nome">
-                                <label for="{{ $campo }}"
-                                       class="col-md-3 text-right col-form-label">{{ __('Name') }}</label>
 
-                                <div class="col-md-9">
-                                    <input type="text" id="{{$campo}}"
-                                           class="form-control @error($campo) is-invalid @enderror" name="{{ $campo }}"
-                                           value="{{ old($campo) }}">
-
-                                    @error($campo)
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <?php $campo = 'cpf'?>
-                            <div class="form-group row cpf">
-                                <label for="{{ $campo }}"
-                                       class="col-md-3 text-right col-form-label">CPF</label>
-
-                                <div class="col-md-9">
-                                    <input type="text" id="{{$campo}}"
-                                           class="cpfinput form-control @error($campo) is-invalid @enderror"
-                                           name="{{ $campo }}"
-                                           value="{{ old($campo) }}">
-
-                                    @error($campo)
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <?php $campo = 'cnpj'?>
                             <div class="form-group row cnpj">
                                 <label for="{{ $campo }}"
@@ -122,6 +68,24 @@
                             <div class="form-group row inscricao">
                                 <label for="{{ $campo }}"
                                        class="col-md-3 text-right col-form-label">Insc. Est.</label>
+
+                                <div class="col-md-9">
+                                    <input type="text" id="{{$campo}}"
+                                           class="form-control @error($campo) is-invalid @enderror" name="{{ $campo }}"
+                                           value="{{ old($campo) }}">
+
+                                    @error($campo)
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <?php $campo = 'contato'?>
+                            <div class="form-group row nome">
+                                <label for="{{ $campo }}"
+                                       class="col-md-3 text-right col-form-label">Contato</label>
 
                                 <div class="col-md-9">
                                     <input type="text" id="{{$campo}}"
@@ -232,11 +196,11 @@
                                                    name="{{ $campo }}"
                                                    value="{{ old($campo) }}">
 
-                                            @error($campo)
-                                            <span class="invalid-feedback" role="alert">
+                                        @error($campo)
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                            @enderror
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -255,11 +219,35 @@
                                                    name="{{ $campo }}"
                                                    value="{{ old($campo) }}">
 
-                                            @error($campo)
-                                            <span class="invalid-feedback" role="alert">
+                                        @error($campo)
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                            @enderror
+                                        @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php $campo = 'skype'?>
+                                <div class="form-group row">
+                                    <label for="{{ $campo }}"
+                                           class="col-md-3 text-right col-form-label">Skype</label>
+
+                                    <div class="col-md-9">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fab fa-skype"></i></div>
+                                            </div>
+                                            <input type="text"
+                                                   class="form-control @error($campo) is-invalid @enderror"
+                                                   name="{{ $campo }}"
+                                                   value="{{ old($campo) }}">
+
+                                        @error($campo)
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -279,11 +267,11 @@
                                                    name="{{ $campo }}"
                                                    value="{{ old($campo) }}">
 
-                                            @error($campo)
-                                            <span class="invalid-feedback" role="alert">
+                                        @error($campo)
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                            @enderror
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -303,11 +291,11 @@
                                                    name="{{ $campo }}"
                                                    value="{{ old($campo) }}">
 
-                                            @error($campo)
-                                            <span class="invalid-feedback" role="alert">
+                                        @error($campo)
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                            @enderror
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -317,9 +305,9 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Registrar Cliente
+                                        Registrar Fornecedor
                                     </button>
-                                    <a href="{{ route('clientes.index') }}" class="btn btn-danger"> Cancelar</a>
+                                    <a href="{{ route('fornecedores.index') }}" class="btn btn-danger"> Cancelar</a>
                                 </div>
                             </div>
                         </form>
@@ -347,53 +335,6 @@
             $('.cep').mask('00000-000');
             $('.cpfinput').mask('000.000.000-00', {reverse: false});
             $('.cnpjinput').mask('00.000.000/0000-00', {reverse: false});
-
-
-            if ($('input[name="pessoa"]:checked').val() === "Juridica") {
-                $('.razaosocial').show();
-                $('.nomefantasia').show();
-                $('.nome').hide();
-                $('.cnpj').show();
-                $('.inscricao').show();
-                $('.cpf').hide();
-
-            } else {
-                $('.nome').show();
-                $('.razaosocial').hide();
-                $('.nomefantasia').hide();
-                $('.cnpj').hide();
-                $('.inscricao').hide();
-                $('.cpf').show();
-
-            }
-            //código a executar quando todos os elementos estão carregados
-
-        });
-
-        $('input[name="pessoa"]').change(function () {
-            if ($('input[name="pessoa"]:checked').val() === "Juridica") {
-                $('.razaosocial').show();
-                $('.nomefantasia').show();
-                $('.cnpj').show();
-                $('.inscricao').show();
-                document.getElementById('cpf').value = '';
-                document.getElementById('nome').value = '';
-                $('.nome').hide();
-                $('.cpf').hide();
-
-            } else {
-                $('.nome').show();
-                $('.cpf').show();
-                $('.razaosocial').hide();
-                $('.nomefantasia').hide();
-                $('.cnpj').hide();
-                $('.inscricao').hide();
-                document.getElementById('razaosocial').value = '';
-                document.getElementById('nomefantasia').value = '';
-                document.getElementById('cnpj').value = '';
-                document.getElementById('isncricao').value = '';
-
-            }
         });
     </script>
 @endsection
