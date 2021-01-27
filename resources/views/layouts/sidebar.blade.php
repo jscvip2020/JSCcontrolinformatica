@@ -124,6 +124,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('equipamento-list')
+                    <li class="{{ (request()->route()->getName()=='equipamentos.index' OR request()->route()->getName()=='equipamentos.create' OR request()->route()->getName()=='equipamentos.edit' OR request()->route()->getName()=='equipamentos.show')? 'active' :'' }}">
+                        <a href="{{ route('equipamentos.index') }}">
+                            <i class="fa fa-tablet"></i>
+                            <span class="menu-text">Equipamentos</span>
+                            <span class="badge badge-pill badge-primary">{{ $equipamentosAll }}</span>
+                        </a>
+                    </li>
+                @endcan
 
                 {{--<li class="sidebar-dropdown">--}}
                 {{--<a href="#">--}}

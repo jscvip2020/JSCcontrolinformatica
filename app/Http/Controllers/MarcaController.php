@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipamento;
 use App\Models\Marca;
 use Illuminate\Http\Request;
 
@@ -103,8 +104,13 @@ class MarcaController extends Controller
      */
     public function destroy($id)
     {
-        $marca = Marca::findOrFail($id);
-        $marca->delete();
-        return redirect()->route('marcas.index')->with('success', 'Marca deletada com successo!!!');
+        $equipamento = Equipamento::where('marca_id',$id)->get();
+        if(count($equipamento)>0){
+            return redirect()->route('equipamentos.index',['marca'=>$id])->with('alert', "Existe equipamentos com essa marca registrado. <br> Exclua o equipamento ou troque a marca dele antes de excluir a MARCA!!!");
+        }else{
+            $marca = Marca::findOrFail($id);
+            $marca->delete();
+            return redirect()->route('marcas.index')->with('success', 'Marca deletada com successo!!!');
+        }
     }
 }

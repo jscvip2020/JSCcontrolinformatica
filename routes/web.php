@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EquipamentoController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarcaController;
@@ -21,4 +22,5 @@ Route::group(['middleware' => ['auth']], function (){
     Route::resource('clientes', ClienteController::class);
     Route::resource('fornecedores', FornecedorController::class);
     Route::resource('marcas', MarcaController::class, ['except' => ['show']]);
+    Route::resource('equipamentos', EquipamentoController::class, ['except' => ['show']]);
 });

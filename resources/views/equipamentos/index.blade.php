@@ -8,7 +8,7 @@
 
 @extends('layouts.appAdmin')
 
-@section('title',' - Controle de Marcas')
+@section('title',' - Controle de Equipamentos')
 
 @section('content')
     <div class="container">
@@ -16,9 +16,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header titulo-table">
-                        <h2 class="col-md-6">Controle de Marcas</h2>
-                        <a class="btn btn-primary" href="{{ route('marcas.create') }}">
-                            <i class="fa fa-plus"> Nova Marca</i>
+                        <h2 class="col-md-6">Controle de Equipamentos</h2>
+                        <a class="btn btn-primary" href="{{ route('equipamentos.create') }}">
+                            <i class="fa fa-plus"> Novo Equipamento</i>
                         </a>
                     </div>
 
@@ -32,36 +32,42 @@
                                         <thead>
                                         <tr>
                                             <th class="text-left">Nº</th>
+                                            <th class="text-left">Marca</th>
                                             <th class="text-left">Nome</th>
+                                            <th class="text-left">Modelo</th>
+                                            <th class="text-left">Descrição</th>
                                             <th width="150px" class="text-center"></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php $i = 1 ?>
-                                        @foreach($marcas as $marca)
+                                        @foreach($rows as $equipamento)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td>{{ $marca->nome }}</td>
+                                                <td>{{ $equipamento->marca->nome }}</td>
+                                                <td>{{ $equipamento->nome }}</td>
+                                                <td>{{ $equipamento->modelo }}</td>
+                                                <td>{{ $equipamento->descricao }}</td>
                                                 <td class="action">
-                                                    @can('marca-edit')
+                                                    @can('equipamento-edit')
                                                         <a class="btn btn-info btn-sm mr-1"
-                                                           href="{{ route('marcas.edit', $marca->id) }}"
+                                                           href="{{ route('equipamentos.edit', $equipamento->id) }}"
                                                            title="Editar"><i
                                                                     class="fa fa-edit"></i></a>
                                                     @endcan
-                                                    @can('marca-delete')
-                                                        <form id="form-delete{{$marca->id}}"
-                                                              action="{{ route('marcas.destroy', $marca->id) }}"
+                                                    @can('equipamento-delete')
+                                                        <form id="form-delete{{$equipamento->id}}"
+                                                              action="{{ route('equipamentos.destroy', $equipamento->id) }}"
                                                               method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="button"
                                                                     onclick="event.preventDefault();
-                                                                            if(confirm('Deseja excluir a Marca \n {{ $marca->nome }}?')){
-                                                                            document.getElementById('form-delete{{$marca->id}}').submit();
+                                                                            if(confirm('Deseja excluir o Equipamento \n {{ $equipamento->nome }}?')){
+                                                                            document.getElementById('form-delete{{$equipamento->id}}').submit();
                                                                             }"
                                                                     class="btn btn-sm btn-danger"
-                                                                    title="Remover {{ $marca->nome }}"><i
+                                                                    title="Remover {{ $equipamento->nome }}"><i
                                                                         class="fa fa-trash"></i></button>
                                                         </form>
                                                     @endcan
@@ -71,7 +77,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $marcas->onEachSide(3)->links() }}
+                                    {{ $rows->onEachSide(3)->links() }}
                                 </div>
                             </div>
                         </div>

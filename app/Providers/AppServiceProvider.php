@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\client;
+use App\Models\Equipamento;
 use App\Models\Fornecedor;
 use App\Models\Marca;
 use App\Models\User;
@@ -40,11 +41,13 @@ class AppServiceProvider extends ServiceProvider
         $clientes = count(Client::all());
         $fornecedores = count(Fornecedor::all());
         $marcas = count(Marca::all());
+        $equipamentos = count(Equipamento::all());
         view()->share('rolesAll', $roles);
         view()->share('users', $users);
         view()->share('permissionsAll', $permissions);
         view()->share('clientesAll', $clientes);
         view()->share('fornecedoresAll', $fornecedores);
         view()->share('marcasAll', $marcas);
+        view()->share('equipamentosAll', $equipamentos);
     }
 }
