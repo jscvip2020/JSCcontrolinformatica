@@ -70,33 +70,54 @@
                 <li class="header-menu">
                     <span>General</span>
                 </li>
-                @can('user-list')
-                    <li class="{{ (request()->route()->getName()=='users.index' OR request()->route()->getName()=='users.create' OR request()->route()->getName()=='users.edit')? 'active' :'' }}">
-                        <a href="{{ route('users.index') }}">
-                            <i class="fa fa-user"></i>
-                            <span class="menu-text">Usuários</span>
-                            <span class="badge badge-pill badge-primary">{{ $users }}</span>
-                        </a>
-                    </li>
-                @endcan
-                @can('role-list')
-                    <li class="{{ (request()->route()->getName()=='roles.index' OR request()->route()->getName()=='roles.create' OR request()->route()->getName()=='roles.edit' OR request()->route()->getName()=='roles.show')? 'active' :'' }}">
-                        <a href="{{ route('roles.index') }}">
-                            <i class="fa fa-book"></i>
-                            <span class="menu-text">Regras</span>
-                            <span class="badge badge-pill badge-primary">{{ $rolesAll }}</span>
-                        </a>
-                    </li>
-                @endcan
-                @can('permission-list')
-                    <li class="{{ (request()->route()->getName()=='permissions.index' OR request()->route()->getName()=='permissions.create' OR request()->route()->getName()=='permissions.edit' OR request()->route()->getName()=='permissions.show')? 'active' :'' }}">
-                        <a href="{{ route('permissions.index') }}">
-                            <i class="fa fa-book"></i>
-                            <span class="menu-text">Permissões</span>
-                            <span class="badge badge-pill badge-primary">{{ $permissionsAll }}</span>
-                        </a>
-                    </li>
-                @endcan
+                <li class="sidebar-dropdown {{ (
+                request()->route()->getName()=='users.index' OR
+                request()->route()->getName()=='users.create' OR
+                request()->route()->getName()=='users.edit' OR
+                request()->route()->getName()=='roles.index' OR
+                request()->route()->getName()=='roles.create' OR
+                request()->route()->getName()=='roles.edit' OR
+                request()->route()->getName()=='roles.show' OR
+                request()->route()->getName()=='permissions.index' OR
+                request()->route()->getName()=='permissions.create' OR
+                request()->route()->getName()=='permissions.edit' OR
+                request()->route()->getName()=='permissions.show')? 'active' :'' }}">
+                    <a href="#">
+                        <i class="fa fa-key"></i>
+                        <span class="menu-text">Controle de acesso</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            @can('user-list')
+                                <li class="{{ (request()->route()->getName()=='users.index' OR request()->route()->getName()=='users.create' OR request()->route()->getName()=='users.edit')? 'active' :'' }}">
+                                    <a href="{{ route('users.index') }}">
+                                        <i class="fa fa-user"></i>
+                                        <span class="menu-text">Usuários</span>
+                                        <span class="badge badge-pill badge-primary">{{ $users }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('role-list')
+                                <li class="{{ (request()->route()->getName()=='roles.index' OR request()->route()->getName()=='roles.create' OR request()->route()->getName()=='roles.edit' OR request()->route()->getName()=='roles.show')? 'active' :'' }}">
+                                    <a href="{{ route('roles.index') }}">
+                                        <i class="fa fa-book"></i>
+                                        <span class="menu-text">Regras</span>
+                                        <span class="badge badge-pill badge-primary">{{ $rolesAll }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('permission-list')
+                                <li class="{{ (request()->route()->getName()=='permissions.index' OR request()->route()->getName()=='permissions.create' OR request()->route()->getName()=='permissions.edit' OR request()->route()->getName()=='permissions.show')? 'active' :'' }}">
+                                    <a href="{{ route('permissions.index') }}">
+                                        <i class="fa fa-book"></i>
+                                        <span class="menu-text">Permissões</span>
+                                        <span class="badge badge-pill badge-primary">{{ $permissionsAll }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
                 @can('client-list')
                     <li class="{{ (request()->route()->getName()=='clientes.index' OR request()->route()->getName()=='clientes.create' OR request()->route()->getName()=='clientes.edit' OR request()->route()->getName()=='clientes.show')? 'active' :'' }}">
                         <a href="{{ route('clientes.index') }}">
@@ -133,29 +154,24 @@
                         </a>
                     </li>
                 @endcan
-
-                {{--<li class="sidebar-dropdown">--}}
-                {{--<a href="#">--}}
-                {{--<i class="fa fa-tachometer-alt"></i>--}}
-                {{--<span class="menu-text">Dashboard</span>--}}
-                {{--<span class="badge badge-pill badge-warning">New</span>--}}
-                {{--</a>--}}
-                {{--<div class="sidebar-submenu">--}}
-                {{--<ul>--}}
-                {{--<li>--}}
-                {{--<a href="#">Dashboard 1--}}
-                {{--<span class="badge badge-pill badge-success">Pro</span>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                {{--<a href="#">Dashboard 2</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                {{--<a href="#">Dashboard 3</a>--}}
-                {{--</li>--}}
-                {{--</ul>--}}
-                {{--</div>--}}
-                {{--</li>--}}
+                @can('fabricante-list')
+                    <li class="{{ (request()->route()->getName()=='fabricantes.index' OR request()->route()->getName()=='fabricantes.create' OR request()->route()->getName()=='fabricantes.edit' OR request()->route()->getName()=='fabricantes.show')? 'active' :'' }}">
+                        <a href="{{ route('fabricantes.index') }}">
+                            <i class="fa fa-industry"></i>
+                            <span class="menu-text">Fabricantes</span>
+                            <span class="badge badge-pill badge-primary">{{ $fabricantesAll }}</span>
+                        </a>
+                    </li>
+                @endcan
+                @can('produto-list')
+                    <li class="{{ (request()->route()->getName()=='produtos.index' OR request()->route()->getName()=='produtos.create' OR request()->route()->getName()=='produtos.edit' OR request()->route()->getName()=='produtos.show')? 'active' :'' }}">
+                        <a href="{{ route('produtos.index') }}">
+                            <i class="fab fa-product-hunt"></i>
+                            <span class="menu-text">Produtos</span>
+                            <span class="badge badge-pill badge-primary">{{ $produtosAll }}</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
         <!-- sidebar-menu  -->

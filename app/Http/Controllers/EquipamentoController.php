@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Equipamento;
 use App\Models\Marca;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class EquipamentoController extends Controller
 {
@@ -26,10 +27,12 @@ class EquipamentoController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('marca')) {
-            $busca = $request->marca;
+        session()->forget(['voltar','id']);
+
+        if ($request->has('achei')) {
+            $busca = $request->achei;
             $rows = Equipamento::where('marca_id', $busca)
-                ->orderBy('id', 'DESC')->paginate(8)->appends('marca', $busca);
+                ->orderBy('id', 'DESC')->paginate(8)->appends('achei', $busca);
         }
         elseif ($request->has('search')) {
             $busca = $request->search;
@@ -49,6 +52,8 @@ class EquipamentoController extends Controller
      */
     public function create()
     {
+        session(['voltar' => request()->route()->getName()]);
+
         $marcas = Marca::all();
         if($marcas){
             return view('equipamentos.create', compact('marcas'));
@@ -84,6 +89,7 @@ class EquipamentoController extends Controller
      */
     public function edit($id)
     {
+        session(['voltar' => request()->route()->getName(),'id' => $id]);
         $marcas = Marca::all();
         $row = Equipamento::findOrFail($id);
         if($marcas){

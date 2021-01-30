@@ -75,7 +75,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $permissions->onEachSide(3)->links() }}
+                                    {{ $permissions->onEachSide(1)->links() }}
                                 </div>
                             </div>
                         </div>

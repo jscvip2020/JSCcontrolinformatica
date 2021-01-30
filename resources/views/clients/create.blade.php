@@ -344,6 +344,7 @@
                 };
 
             $('.phone').mask(SPMaskBehavior, spOptions);
+
             $('.cep').mask('00000-000');
             $('.cpfinput').mask('000.000.000-00', {reverse: false});
             $('.cnpjinput').mask('00.000.000/0000-00', {reverse: false});

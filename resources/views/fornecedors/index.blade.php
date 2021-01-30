@@ -90,7 +90,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $fornecedors->onEachSide(3)->links() }}
+                                    {{ $fornecedors->onEachSide(1)->links() }}
                                 </div>
                             </div>
                         </div>

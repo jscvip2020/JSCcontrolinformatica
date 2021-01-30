@@ -1,19 +1,19 @@
 @extends('layouts.appAdmin')
-@section('title', ' - Registrando Marca')
+@section('title', ' - Registrando Fabricante')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Registrar Marca</div>
+                    <div class="card-header">Registrar Fabricante</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('marcas.store') }}">
+                        <form method="POST" action="{{ route('fabricantes.store') }}">
                             @csrf
 
                             <div class="form-group row">
                                 <?php $input = 'nome' ?>
-                                <label for="{{ $input }}" class="col-md-12 col-form-label">Marca</label>
+                                <label for="{{ $input }}" class="col-md-12 col-form-label">Fabricante</label>
 
                                 <div class="col-md-12">
                                     <input id="{{ $input }}" type="text"
@@ -30,9 +30,9 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Registrar Marca
+                                        Registrar Fabricante
                                     </button>
-                                    <a href="{{ route('marcas.index') }}" class="btn btn-danger"> Cancelar</a>
+                                    <a href="{{ route('fabricantes.index') }}" class="btn btn-danger"> Cancelar</a>
                                 </div>
                             </div>
                         </form>

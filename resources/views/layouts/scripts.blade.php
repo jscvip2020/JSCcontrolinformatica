@@ -18,5 +18,9 @@
 
 
 <script src="{{ asset('js/main.js')}}"></script>
-
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @yield('scripts')

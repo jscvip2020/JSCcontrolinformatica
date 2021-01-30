@@ -8,7 +8,7 @@
 
 @extends('layouts.appAdmin')
 
-@section('title',' - Controle de Clientes')
+@section('title',' - Controle de Produtos')
 
 @section('content')
     <div class="container">
@@ -16,9 +16,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header titulo-table">
-                        <h2 class="col-md-6">Controle de Clientes</h2>
-                        <a class="btn btn-primary" href="{{ route('clientes.create') }}">
-                            <i class="fa fa-plus"> Novo Cliente</i>
+                        <h2 class="col-md-6">Controle de Produtos</h2>
+                        <a class="btn btn-primary" href="{{ route('produtos.create') }}">
+                            <i class="fa fa-plus"> Novo Produto</i>
                         </a>
                     </div>
 
@@ -32,61 +32,58 @@
                                         <thead>
                                         <tr>
                                             <th class="text-left">Nº</th>
+                                            <th class="text-left">Condição</th>
+                                            <th class="text-left">QTD</th>
                                             <th class="text-left">Nome</th>
-                                            <th class="text-left">Documento</th>
-                                            <th class="text-left">Fones</th>
-                                            <th class="text-left">email</th>
+                                            <th class="text-left">Custo</th>
+                                            <th class="text-left">%</th>
+                                            <th class="text-left">Valor</th>
+                                            <th class="text-left">Ativo?</th>
                                             <th width="150px" class="text-center"></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php $i = 1 ?>
-                                        @foreach($clients as $client)
+                                        @foreach($produtos as $produto)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
+                                                <td>{{ $produto->condicao }}</td>
+                                                <td>{{ $produto->qtd }}</td>
+                                                <td>{{ $produto->nome }}</td>
+                                                <td>{{ number_format($produto->valor_custo,2,',','.') }}</td>
+                                                <td>{{ $produto->perc_lucro }}</td>
+                                                <td>{{ number_format($produto->valor_final,2,',','.') }}</td>
                                                 <td>
-                                                    @if($client->pessoa == 'Juridica')
-                                                        {{ $client->nomefantasia }}<br>
-                                                        {{ $client->razaosocial }}
-                                                    @elseif($client->pessoa == 'Fisica')
-                                                        {{ $client->nome }}
+                                                    @if($produto->status)
+                                                        <a href="{{ route('produtos.status',[$produto->id,$produto->status]) }}" class="text-success"><i class="fa fa-check-circle fa-2x"></i></a>
+                                                    @else
+                                                        <a href="{{ route('produtos.status',[$produto->id,$produto->status]) }}" class="text-danger"><i class="fa fa-times-circle fa-2x"></i></a>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    @if($client->pessoa == 'Juridica')
-                                                        CNPJ: {{ $client->cnpj }}<br>Insc.
-                                                        Est.: {{ $client->inscricao }}
-                                                    @elseif($client->pessoa == 'Fisica')
-                                                        CPF: {{ $client->cpf }}
-                                                    @endif
-                                                </td>
-                                                <td>Cel: {{ $client->celular }}<br>Fixo: {{ $client->fixo }}<br>
-                                                    Whatsapp: {{ $client->whatsapp }}</td>
-                                                <td>{{ $client->email }}</td>
                                                 <td class="action">
                                                     <a class="btn btn-success btn-sm mr-1"
-                                                       href="{{ route('clientes.show', $client->id) }}"
+                                                       href="{{ route('produtos.show', $produto->id) }}"
                                                        title="visualizar"><i
                                                                 class="fa fa-eye"></i></a>
-                                                    @can('client-edit')
+                                                    @can('produto-edit')
                                                         <a class="btn btn-info btn-sm mr-1"
-                                                           href="{{ route('clientes.edit', $client->id) }}"
+                                                           href="{{ route('produtos.edit', $produto->id) }}"
                                                            title="Editar"><i
                                                                     class="fa fa-edit"></i></a>
                                                     @endcan
-                                                    @can('client-delete')
-                                                        <form id="form-delete{{$client->id}}"
-                                                              action="{{ route('clientes.destroy', $client->id) }}"
+                                                    @can('produto-delete')
+                                                        <form id="form-delete{{$produto->id}}"
+                                                              action="{{ route('produtos.destroy', $produto->id) }}"
                                                               method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="button"
                                                                     onclick="event.preventDefault();
-                                                                            if(confirm('Deseja excluir esse cliente \n {{$client->nome}}?')){
-                                                                            document.getElementById('form-delete{{$client->id}}').submit();
+                                                                            if(confirm('Deseja excluir a Produto \n {{ $produto->nome }}?')){
+                                                                            document.getElementById('form-delete{{$produto->id}}').submit();
                                                                             }"
                                                                     class="btn btn-sm btn-danger"
-                                                                    title="Remover {{ $client->nome }}"><i
+                                                                    title="Remover {{ $produto->nome }}"><i
                                                                         class="fa fa-trash"></i></button>
                                                         </form>
                                                     @endcan
@@ -96,7 +93,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $clients->onEachSide(1)->links() }}
+                                    {{ $produtos->onEachSide(1)->links() }}
                                 </div>
                             </div>
                         </div>

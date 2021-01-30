@@ -77,7 +77,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $rows->onEachSide(3)->links() }}
+                                    {{ $rows->onEachSide(1)->links() }}
                                 </div>
                             </div>
                         </div>

@@ -18,6 +18,7 @@ class MarcaController extends Controller
         $this->middleware('permission:marca-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:marca-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,11 +26,13 @@ class MarcaController extends Controller
      */
     public function index(Request $request)
     {
+        session()->forget(['voltar','id']);
+
         if ($request->has('search')) {
             $busca = $request->search;
             $marcas = Marca::where('nome', 'LIKE', '%' . $busca . '%')
                 ->orderBy('id', 'DESC')->paginate(8)->appends('search', $busca);
-        }else {
+        } else {
             $marcas = Marca::orderBy('id', 'DESC')->paginate(8);
         }
         return view('marcas.index', compact('marcas'));
@@ -58,15 +61,24 @@ class MarcaController extends Controller
             'nome' => 'required|unique:marcas,nome',
         ]);
 
-            Marca::create($request->all());
+        Marca::create($request->all());
 
-        return redirect()->route('marcas.index')->with('success', 'Marca criada com sucesso!!');
+
+        if (session('voltar')) {
+            if (session('id')) {
+                return redirect()->route(session('voltar'),session('id'));
+            } else {
+                return redirect()->route(session('voltar'));
+            }
+        } else {
+            return redirect()->route('marcas.index')->with('success', 'Marca criada com sucesso!!');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,7 +99,7 @@ class MarcaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nome' => 'required|unique:marcas,nome,'.$id
+            'nome' => 'required|unique:marcas,nome,' . $id
         ]);
 
         $data = Marca::findOrFail($id);
@@ -99,15 +111,15 @@ class MarcaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $equipamento = Equipamento::where('marca_id',$id)->get();
-        if(count($equipamento)>0){
-            return redirect()->route('equipamentos.index',['marca'=>$id])->with('alert', "Existe equipamentos com essa marca registrado. <br> Exclua o equipamento ou troque a marca dele antes de excluir a MARCA!!!");
-        }else{
+        $equipamento = Equipamento::where('marca_id', $id)->get();
+        if (count($equipamento) > 0) {
+            return redirect()->route('equipamentos.index', ['achei' => $id])->with('alert', "Existe equipamentos com essa marca registrado. <br> Exclua o equipamento ou troque a marca dele antes de excluir a MARCA!!!");
+        } else {
             $marca = Marca::findOrFail($id);
             $marca->delete();
             return redirect()->route('marcas.index')->with('success', 'Marca deletada com successo!!!');

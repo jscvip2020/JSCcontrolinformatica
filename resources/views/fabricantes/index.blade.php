@@ -8,7 +8,7 @@
 
 @extends('layouts.appAdmin')
 
-@section('title',' - Controle de Marcas')
+@section('title',' - Controle de Fabricantes')
 
 @section('content')
     <div class="container">
@@ -16,9 +16,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header titulo-table">
-                        <h2 class="col-md-6">Controle de Marcas</h2>
-                        <a class="btn btn-primary" href="{{ route('marcas.create') }}">
-                            <i class="fa fa-plus"> Nova Marca</i>
+                        <h2 class="col-md-6">Controle de Fabricantes</h2>
+                        <a class="btn btn-primary" href="{{ route('fabricantes.create') }}">
+                            <i class="fa fa-plus"> Nova Fabricante</i>
                         </a>
                     </div>
 
@@ -33,35 +33,37 @@
                                         <tr>
                                             <th class="text-left">Nº</th>
                                             <th class="text-left">Nome</th>
+                                            <th class="text-left">Produtos</th>
                                             <th width="150px" class="text-center"></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php $i = 1 ?>
-                                        @foreach($marcas as $marca)
+                                        @foreach($fabricantes as $fabricante)
                                             <tr>
                                                 <td>{{ $i++ }}</td>
-                                                <td>{{ $marca->nome }}</td>
+                                                <td>{{ $fabricante->nome }}</td>
+                                                <td>{{ count($fabricante->produtos) }}</td>
                                                 <td class="action">
-                                                    @can('marca-edit')
+                                                    @can('fabricante-edit')
                                                         <a class="btn btn-info btn-sm mr-1"
-                                                           href="{{ route('marcas.edit', $marca->id) }}"
+                                                           href="{{ route('fabricantes.edit', $fabricante->id) }}"
                                                            title="Editar"><i
                                                                     class="fa fa-edit"></i></a>
                                                     @endcan
-                                                    @can('marca-delete')
-                                                        <form id="form-delete{{$marca->id}}"
-                                                              action="{{ route('marcas.destroy', $marca->id) }}"
+                                                    @can('fabricante-delete')
+                                                        <form id="form-delete{{$fabricante->id}}"
+                                                              action="{{ route('fabricantes.destroy', $fabricante->id) }}"
                                                               method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="button"
                                                                     onclick="event.preventDefault();
-                                                                            if(confirm('Deseja excluir a Marca \n {{ $marca->nome }}?')){
-                                                                            document.getElementById('form-delete{{$marca->id}}').submit();
+                                                                            if(confirm('Deseja excluir a Fabricante \n {{ $fabricante->nome }}?')){
+                                                                            document.getElementById('form-delete{{$fabricante->id}}').submit();
                                                                             }"
                                                                     class="btn btn-sm btn-danger"
-                                                                    title="Remover {{ $marca->nome }}"><i
+                                                                    title="Remover {{ $fabricante->nome }}"><i
                                                                         class="fa fa-trash"></i></button>
                                                         </form>
                                                     @endcan
@@ -71,7 +73,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $marcas->onEachSide(1)->links() }}
+                                    {{ $fabricantes->onEachSide(1)->links() }}
                                 </div>
                             </div>
                         </div>

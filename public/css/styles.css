@@ -7,3 +7,16 @@
     justify-content: center;
 }
 
+.viewproduto span {
+    min-width: 140px;
+    display: inline-block;
+    text-align: right;
+    padding: 0 10px;
+    font-weight: bold;
+}
+.barra {
+    text-align: center;
+    border-radius: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}

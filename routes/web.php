@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EquipamentoController;
+use App\Http\Controllers\FabricanteController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +25,7 @@ Route::group(['middleware' => ['auth']], function (){
     Route::resource('fornecedores', FornecedorController::class);
     Route::resource('marcas', MarcaController::class, ['except' => ['show']]);
     Route::resource('equipamentos', EquipamentoController::class, ['except' => ['show']]);
+    Route::resource('fabricantes', FabricanteController::class, ['except' => ['show']]);
+    Route::resource('produtos', ProdutoController::class);
+    Route::get('produtos/{id}/{status}', [ProdutoController::class,'status'])->name('produtos.status');
 });

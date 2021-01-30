@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\client;
 use App\Models\Equipamento;
+use App\Models\Fabricante;
 use App\Models\Fornecedor;
 use App\Models\Marca;
+use App\Models\Produto;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
@@ -42,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
         $fornecedores = count(Fornecedor::all());
         $marcas = count(Marca::all());
         $equipamentos = count(Equipamento::all());
+        $fabricantes = count(Fabricante::all());
+        $produtos = count(Produto::all());
         view()->share('rolesAll', $roles);
         view()->share('users', $users);
         view()->share('permissionsAll', $permissions);
@@ -49,5 +53,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('fornecedoresAll', $fornecedores);
         view()->share('marcasAll', $marcas);
         view()->share('equipamentosAll', $equipamentos);
+        view()->share('fabricantesAll', $fabricantes);
+        view()->share('produtosAll', $produtos);
     }
 }

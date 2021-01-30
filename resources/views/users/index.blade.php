@@ -80,7 +80,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $data->onEachSide(3)->links() }}
+                                    {{ $data->onEachSide(1)->links() }}
                                 </div>
                             </div>
                         </div>

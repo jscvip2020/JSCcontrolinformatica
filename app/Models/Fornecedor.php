@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fornecedor extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'razaosocial',
         'nomefantasia',
@@ -22,7 +23,10 @@ class Fornecedor extends Model
         'skype',
         'fixo',
         'email',
-
     ];
-    use HasFactory;
+
+    public function produtos()
+    {
+        return $this->hasMany(Produto::class);
+    }
 }

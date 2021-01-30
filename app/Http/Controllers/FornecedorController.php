@@ -22,6 +22,8 @@ class FornecedorController extends Controller
      */
     public function index(Request $request)
     {
+        session()->forget(['voltar','id']);
+
         if ($request->has('search')) {
             $busca = $request->search;
             $fornecedors = Fornecedor::where('contato','LIKE','%'.$busca.'%')
@@ -43,7 +45,7 @@ class FornecedorController extends Controller
      */
     public function create()
     {
-        return view('fornecedors.create');
+            return view('fornecedors.create');
     }
 
     /**
@@ -67,10 +69,20 @@ class FornecedorController extends Controller
         ]);
 
         $fornecedore = Fornecedor::create($request->all());
-        if($fornecedore) {
-            return redirect()->route('fornecedores.index')->with('success', 'Adicionado com sucesso!!');
-        }else {
-            return redirect()->route('fornecedores.index')->with('error', 'Não foi posível adicionar!!');
+
+        if (session('voltar')) {
+            if (session('id')) {
+                return redirect()->route(session('voltar'),session('id'));
+            } else {
+                return redirect()->route(session('voltar'));
+            }
+        } else {
+
+            if ($fornecedore) {
+                return redirect()->route('fornecedores.index')->with('success', 'Adicionado com sucesso!!');
+            } else {
+                return redirect()->route('fornecedores.index')->with('error', 'Não foi posível adicionar!!');
+            }
         }
     }
 

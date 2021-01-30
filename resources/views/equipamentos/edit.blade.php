@@ -12,9 +12,9 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="nome" class="col-md-12 col-form-label">Equipamento do Equipamento</label>
-
                                 <?php $input = 'marca_id' ?>
+                                <label for="{{ $input }}" class="col-md-12 col-form-label">Equipamento do Equipamento</label>
+
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <select id="{{ $input }}" type="text" data-toggle="tooltip"
@@ -39,9 +39,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="nome" class="col-md-12 col-form-label">Nome do Equipamento</label>
-
                                 <?php $input = 'nome' ?>
+                                <label for="{{ $input }}" class="col-md-12 col-form-label">Nome do Equipamento</label>
+
                                 <div class="col-md-12">
                                     <input id="{{ $input }}" type="text"
                                            class="form-control @error($input) is-invalid @enderror" name="{{ $input }}"
@@ -55,9 +55,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="nome" class="col-md-12 col-form-label">Modelo do Equipamento</label>
-
                                 <?php $input = 'modelo' ?>
+                                <label for="{{ $input }}" class="col-md-12 col-form-label">Modelo do Equipamento</label>
+
                                 <div class="col-md-12">
                                     <input id="{{ $input }}" type="text"
                                            class="form-control @error($input) is-invalid @enderror" name="{{ $input }}"
@@ -71,9 +71,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="nome" class="col-md-12 col-form-label">Descrição do Equipamento</label>
-
                                 <?php $input = 'descricao' ?>
+                                <label for="{{ $input }}" class="col-md-12 col-form-label">Descrição do Equipamento</label>
+
                                 <div class="col-md-12">
                                     <textarea id="{{ $input }}" type="text"
                                               class="form-control @error($input) is-invalid @enderror" name="{{ $input }}">{{ old($input) ? old($input) : $row->$input }}</textarea>

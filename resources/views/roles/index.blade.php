@@ -79,7 +79,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{ $roles->onEachSide(3)->links() }}
+                                    {{ $roles->onEachSide(1)->links() }}
                                 </div>
                             </div>
                         </div>
