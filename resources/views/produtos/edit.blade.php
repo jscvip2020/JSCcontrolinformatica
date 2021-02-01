@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-2">
+                                <div class="col-md-6">
                                     <label for="nome" class="col-md-12 col-form-label">QTD</label>
 
                                     <?php $input = 'qtd' ?>
@@ -87,7 +87,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-6">
                                     <?php $input = 'min_estoque' ?>
                                     <label for="{{ $input }}" class="col-md-12 col-form-label">Min Est.</label>
 
@@ -105,7 +105,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-4">
 
                                     <?php $input = 'valor_custo' ?>
                                     <label for="{{ $input }}" class="col-md-12 col-form-label">Valor Custo</label>
@@ -123,7 +125,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-4">
 
                                     <label for="nome" class="col-md-12 col-form-label">Perc.</label>
 
@@ -142,7 +144,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <?php $input = 'valor_final' ?>
                                     <label for="{{ $input }}" class="col-md-12 col-form-label">Valor Final</label>
 
@@ -177,7 +179,8 @@
                                             @endforeach
                                         </select>
                                         <div class="input-group-append">
-                                            <a href="{{ route('fornecedores.create') }}" class="btn btn-outline-secondary" type="button">...</a>
+                                            <a href="{{ route('fornecedores.create') }}"
+                                               class="btn btn-outline-secondary" type="button">...</a>
                                         </div>
 
                                         @error($input)
@@ -204,7 +207,8 @@
                                             @endforeach
                                         </select>
                                         <div class="input-group-append">
-                                            <a href="{{ route('fabricantes.create') }}" class="btn btn-outline-secondary" type="button">...</a>
+                                            <a href="{{ route('fabricantes.create') }}"
+                                               class="btn btn-outline-secondary" type="button">...</a>
                                         </div>
 
                                         @error($input)

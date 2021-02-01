@@ -8,6 +8,7 @@ use App\Models\Fabricante;
 use App\Models\Fornecedor;
 use App\Models\Marca;
 use App\Models\Produto;
+use App\Models\Servico;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
@@ -24,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       //
+        //
     }
 
     /**
@@ -37,23 +38,45 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
 
-        $users = count(User::all());
-        $roles = count(Role::all());
-        $permissions = count(Permission::all());
-        $clientes = count(Client::all());
-        $fornecedores = count(Fornecedor::all());
-        $marcas = count(Marca::all());
-        $equipamentos = count(Equipamento::all());
-        $fabricantes = count(Fabricante::all());
-        $produtos = count(Produto::all());
-        view()->share('rolesAll', $roles);
-        view()->share('users', $users);
-        view()->share('permissionsAll', $permissions);
-        view()->share('clientesAll', $clientes);
-        view()->share('fornecedoresAll', $fornecedores);
-        view()->share('marcasAll', $marcas);
-        view()->share('equipamentosAll', $equipamentos);
-        view()->share('fabricantesAll', $fabricantes);
-        view()->share('produtosAll', $produtos);
+        if (Schema::hasTable('roles')) {
+            $roles = count(Role::all());
+            view()->share('rolesAll', $roles);
+        }
+        if (Schema::hasTable('users')) {
+            $users = count(User::all());
+            view()->share('users', $users);
+        }
+        if (Schema::hasTable('permissions')) {
+            $permissions = count(Permission::all());
+            view()->share('permissionsAll', $permissions);
+        }
+        if (Schema::hasTable('clients')) {
+            $clientes = count(Client::all());
+            view()->share('clientesAll', $clientes);
+        }
+        if (Schema::hasTable('fornecedors')) {
+            $fornecedores = count(Fornecedor::all());
+            view()->share('fornecedoresAll', $fornecedores);
+        }
+        if (Schema::hasTable('marcas')) {
+            $marcas = count(Marca::all());
+            view()->share('marcasAll', $marcas);
+        }
+        if (Schema::hasTable('equipamentos')) {
+            $equipamentos = count(Equipamento::all());
+            view()->share('equipamentosAll', $equipamentos);
+        }
+        if (Schema::hasTable('fabricantes')) {
+            $fabricantes = count(Fabricante::all());
+            view()->share('fabricantesAll', $fabricantes);
+        }
+        if (Schema::hasTable('produtos')) {
+            $produtos = count(Produto::all());
+            view()->share('produtosAll', $produtos);
+        }
+        if (Schema::hasTable('servicos')) {
+            $servicos = count(Servico::all());
+            view()->share('servicosAll', $servicos);
+        }
     }
 }

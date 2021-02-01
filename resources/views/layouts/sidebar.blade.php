@@ -172,6 +172,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('servico-list')
+                    <li class="{{ (request()->route()->getName()=='servicos.index' OR request()->route()->getName()=='servicos.create' OR request()->route()->getName()=='servicos.edit' OR request()->route()->getName()=='servicos.show')? 'active' :'' }}">
+                        <a href="{{ route('servicos.index') }}">
+                            <i class="fab fa-servicestack"></i>
+                            <span class="menu-text">Serviços</span>
+                            <span class="badge badge-pill badge-primary">{{ $servicosAll }}</span>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
         <!-- sidebar-menu  -->

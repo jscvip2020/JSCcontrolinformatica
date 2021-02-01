@@ -9,6 +9,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,6 @@ Route::group(['middleware' => ['auth']], function (){
     Route::resource('fabricantes', FabricanteController::class, ['except' => ['show']]);
     Route::resource('produtos', ProdutoController::class);
     Route::get('produtos/{id}/{status}', [ProdutoController::class,'status'])->name('produtos.status');
+    Route::resource('servicos', ServicoController::class,['except' => ['show','create']]);
+    Route::get('servicos/{id}/{status}', [ServicoController::class,'status'])->name('servicos.status');
 });
